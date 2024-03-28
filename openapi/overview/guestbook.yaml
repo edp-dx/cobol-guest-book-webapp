@@ -1,0 +1,51 @@
+openapi: 3.0.0
+info:
+  title: COBOL Guest Book Webapp API
+  description: API for interacting with the COBOL Guest Book Web Application, demonstrating how to use GnuCOBOL for web application development.
+  version: "1.0"
+servers:
+  - url: "http://localhost:8000"
+    description: Development server
+paths:
+  /sign:
+    post:
+      summary: Sign the guest book
+      description: Allows users to sign the guest book by providing their name and message.
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Name of the signer
+                message:
+                  type: string
+                  description: Message from the signer
+              required:
+                - name
+                - message
+      responses:
+        "200":
+          description: Successfully signed the guest book
+          content:
+            text/html:
+              schema:
+                type: string
+        "400":
+          description: Bad request, missing name or message
+  /view:
+    get:
+      summary: View the guest book
+      description: Retrieves all entries from the guest book.
+      responses:
+        "200":
+          description: A list of all guest book entries
+          content:
+            text/html:
+              schema:
+                type: string
+components:
+  schemas: {}
